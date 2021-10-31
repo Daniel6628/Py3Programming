@@ -48,7 +48,6 @@ def get_neg(astr3):
 
 with open('project_twitter_data.csv', 'r') as proj_twi:
     lines = proj_twi.readlines()[1:]
-    ct = 0
     lst = []
     for lin in lines:
         lin = lin.strip()
