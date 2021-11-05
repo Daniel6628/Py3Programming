@@ -57,9 +57,14 @@ class Grass_Pokemon(Pokemon):
         self.attack_boost = 2
         self.defense_boost = 3
         self.evolve = 12
+    
+    def action(self):
+        return "{} knows a lot of different moves!".format(self.name)
 
     def moves(self):
         self.p_moves = ["razor leaf", "synthesis", "petal dance"]
+
+p1 = Grass_Pokemon("Belle")
 '''
 Modify the Grass_Pokemon subclass so that the attack strength for Grass_Pokemon instances does not change until they reach level 10. At level 10 and up, their attack strength should increase by the attack_boost amount when they are trained.
 To test, create an instance of the class with the name as "Bulby". Assign the instance to the variable p2. Create another instance of the Grass_Pokemon class with the name set 
@@ -88,7 +93,9 @@ class Pokemon(object):
 
     def attack_up(self):
         self.attack = self.attack + self.attack_boost
-        return self.attack
+        if self.attack >= 10:
+            self.attack += self.level
+            return self.attack
 
     def defense_up(self):
         self.defense = self.defense + self.defense_boost
@@ -121,6 +128,10 @@ class Grass_Pokemon(Pokemon):
 
     def moves(self):
         self.p_moves = ["razor leaf", "synthesis", "petal dance"]
+
+p2 = Grass_Pokemon("Bulby")
+p3 = Grass_Pokemon("Pika")
+p3.train()
         
 '''
 Along with the Pokemon parent class, we have also provided several subclasses. Write another method in the parent class that will be inherited by the subclasses. Call it opponent. It should return which type of pokemon the current type is weak and strong against, as a tuple.
@@ -146,6 +157,7 @@ class Pokemon():
         self.level = level
         self.weak = "Normal"
         self.strong = "Normal"
+        #self.p_type = self.p_type()
 
     def train(self):
         self.update()
@@ -175,6 +187,16 @@ class Pokemon():
         self.attack_boost = 3
         self.defense_boost = 2
         self.evolve = 10
+        
+    def opponent(self):
+        if self.p_type == "Grass":
+            return ('Fire', 'Water')
+        elif self.p_type == 'Ghost':
+            return ('Dark', 'Psychic')
+        elif self.p_type == 'Fire':
+            return ('Water', 'Grass')
+        elif self.p_type == 'Flying':
+            return ('Electric', 'Fighting')
 
     def __str__(self):
         self.update()
